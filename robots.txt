@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /gentlevanguard/
+Sitemap: https://eortiz148700.github.io/gentlevanguard/sitemap.xml
