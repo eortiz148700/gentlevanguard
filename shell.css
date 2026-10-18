@@ -340,8 +340,13 @@
   font: 12px/1.5 var(--gv-font-body, Inter, sans-serif);
 }
 .gv-footer a {
-  color: var(--gv-purple-soft, var(--gv-accent, #c4b5fd));
+  color: var(--gv-text-secondary, var(--gv-text, #e8eef4));
   text-decoration: none;
+}
+.gv-footer a:not(.gv-brand) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 .gv-footer a:hover,
 .gv-footer a:focus-visible {

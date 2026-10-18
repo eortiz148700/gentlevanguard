@@ -23,3 +23,42 @@
 @media(max-width:900px){.operation-network{max-width:680px;width:100%;margin-inline:auto}.op-input,.op-output{font-size:12.5px;padding:12px}.op-core,.core-plane{width:100px;height:100px}.op-core strong{font-size:12px}.op-board{height:350px}.connections-layout>div:first-child{max-width:600px}}
 @media(max-width:640px){.controls .language-control{padding:0 6px}.language-icon{width:16px;height:16px}.controls .language-control select{font-size:12px;width:44px}.operation-network{padding:24px 16px}.operation-network figcaption{font-size:15.5px}.op-board{height:330px}.op-input,.op-output{min-height:60px;font-size:10.5px;padding:7px;gap:5px;width:28%}.op-input{flex-direction:column;align-items:flex-start;gap:4px}.op-output{padding:8px}.op-input svg{width:16px;height:16px}.op-core,.core-plane{width:62px;height:62px}.op-core img{width:40px;height:40px}.plane-back{top:20px}.core-orbit{inset:-12px}.op-core strong{width:98px;top:calc(100% + 24px);font-size:10.5px}.op-scenarios p{min-height:88px;font-size:12.5px}.op-input,.op-output{transform:translateY(-2px)}.op-signal{stroke-width:2.5}.faq>div:last-child{padding-inline:20px}.faq:before{background-size:cover;opacity:.25}.method-principle{font-size:15.5px;margin-bottom:28px}}
 @media(prefers-reduced-motion:reduce){.op-signal,.plane-front{animation:none!important}.op-signal{stroke-dasharray:none;opacity:0}.operation-network[data-entry=sales] .signal-sales,.operation-network[data-entry=tasks] .signal-tasks,.operation-network[data-entry=data] .signal-data{opacity:1}.faq summary svg{transition:none}}
+
+/* Readable secondary type and touch targets; no parallel brand tokens. */
+.op-mobile-connections{display:none}
+.scene-caption{font-size:12px}
+.operation-network .op-note{font-size:12.5px}
+.op-output{font-size:12px}
+.gv-footer a:not(.gv-brand),.gv-footer small,.gv-footer p{font-size:13px}
+.privacy-link{display:inline-flex;align-items:center;min-height:44px;font-size:13px}
+.hero-note{font-size:13px}
+.op-scenarios p{min-height:0}
+@media(max-width:640px){
+  .controls button{width:44px;min-height:44px;height:44px}
+  .controls .language-control,.controls .language-control select{min-height:44px}
+  .scene-caption{font-size:12px;left:20px}
+  .hero-note{font-size:12.5px}
+  .op-board{height:460px;margin-top:24px}
+  .op-connections:not(.op-mobile-connections){display:none}
+  .op-mobile-connections{display:block}
+  .op-input,.op-output{width:30%;min-height:102px;top:0;bottom:auto;transform:none;padding:9px 7px;font-size:12px;line-height:1.5;gap:6px;flex-direction:column;align-items:flex-start}
+  .input-sales,.output-0{left:0;right:auto}
+  .input-tasks,.output-1{left:35%;right:auto}
+  .input-data,.output-2{left:70%;right:auto}
+  .op-output{top:auto;bottom:0;min-height:100px;justify-content:center}
+  .op-core{top:49%;width:72px;height:72px}
+  .core-plane{width:72px;height:72px}
+  .op-core strong{top:calc(100% + 16px);width:128px;font-size:12px;background:var(--gv-bg);padding:4px;border-radius:var(--gv-radius-sm)}
+  .op-scenarios p{font-size:14px;min-height:0}
+  .operation-network .op-note{font-size:12.5px;margin-top:20px}
+}
+@media(max-width:360px){
+  .controls{gap:4px}
+  .controls button{width:40px}
+  .controls .language-control{padding-inline:3px;gap:2px}
+  .controls .language-control select{width:34px;min-width:34px;padding-inline:0}
+  .language-icon{width:14px;height:14px}
+  .op-input,.op-output{padding-inline:6px}
+}
+
+@media(max-width:640px){.motion-toggle,.scroll-cue{font-size:12px}.motion-toggle{min-height:44px}.service-tab{font-size:12px}.scroll-cue{min-height:44px}}

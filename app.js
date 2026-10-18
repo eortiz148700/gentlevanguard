@@ -5,6 +5,7 @@
   Object.assign(spanish, {languageLabel:'Idioma',themeLabel:'Cambiar tema',menuLabel:'Alternar navegación',navLabel:'Navegación principal',openedWa:'Se abrirá WhatsApp con tu mensaje. Revisalo y envialo allí.',openedEmail:'Se abrirá tu aplicación de correo con el mensaje. Revisalo y envialo allí.',messageIntro:'¡Hola GentleVanguard! Quiero conversar sobre un proyecto.',messageName:'Nombre',messageCompany:'Organización',messageInterest:'Interés',emailSubject:'Consulta para GentleVanguard'});
   Object.assign(spanish, {siteTitle:document.title,metaDescription:document.querySelector('meta[name="description"]').content,ogDescription:document.querySelector('meta[property="og:description"]').content,opEntries:'Puntos de entrada',langHint:'Elegí el idioma del sitio'});
   const copy = () => document.documentElement.lang === 'es' ? spanish : window.GV_COPY[document.documentElement.lang];
+  spanish.messageSource = 'Referencia de campaña';
   const nav = document.querySelector('#navigation');
   const menu = document.querySelector('#menu');
   function closeMenu() { nav.classList.remove('is-open'); menu.setAttribute('aria-expanded','false'); }
@@ -37,7 +38,9 @@
     const form = event.currentTarget;
     if (!form.reportValidity()) return;
     const fields = new FormData(form);
-    const text = [copy().messageIntro, `${copy().messageName}: ${fields.get('name').trim()}`, fields.get('company').trim() ? `${copy().messageCompany}: ${fields.get('company').trim()}` : '', `${copy().messageInterest}: ${form.elements.interest.selectedOptions[0].textContent}`, '', fields.get('message').trim()].filter(line => line !== '').join('\n');
+    const params = new URLSearchParams(location.search);
+    const campaign = ['utm_source','utm_campaign','utm_content'].map(key => params.get(key) || '').filter(value => /^[a-z0-9_-]{1,80}$/i.test(value)).join(' / ');
+    const text = [copy().messageIntro, `${copy().messageName}: ${fields.get('name').trim()}`, fields.get('company').trim() ? `${copy().messageCompany}: ${fields.get('company').trim()}` : '', `${copy().messageInterest}: ${form.elements.interest.selectedOptions[0].textContent}`, campaign ? `${copy().messageSource}: ${campaign}` : '', '', fields.get('message').trim()].filter(line => line !== '').join('\n');
     if (event.submitter?.value === 'email') {
       document.querySelector('#form-status').textContent = copy().openedEmail;
       window.location.href = `mailto:gentlevanguard@gmail.com?subject=${encodeURIComponent(copy().emailSubject)}&body=${encodeURIComponent(text)}`;
