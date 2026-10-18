@@ -68,3 +68,8 @@
 .language-control[data-input=pointer] select:focus{outline:none}
 .section-accent{color:var(--gv-purple-soft)}
 [data-theme=light] .section-accent{color:var(--gv-purple-deep)}
+.privacy-enhanced{padding:0}
+.privacy .gv-dialog p{font-size:16px;max-width:65ch}
+.brand-closing{padding-block:48px 64px;position:relative}
+.brand-closing:before{content:'';display:block;width:64px;height:3px;background:var(--gv-gradient);margin-bottom:24px}
+.brand-closing p{font:700 clamp(26px,3.5vw,44px)/1.25 var(--gv-font-display);letter-spacing:-.025em;color:var(--gv-text);max-width:24ch;margin:0;text-wrap:balance}

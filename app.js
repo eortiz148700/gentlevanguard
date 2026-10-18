@@ -1,5 +1,34 @@
 (() => {
   'use strict';
+  // Progressive enhancement: the anchored disclosure remains usable without JS.
+  const privacy = document.querySelector('#privacidad');
+  if (typeof HTMLDialogElement !== 'undefined' && 'showModal' in HTMLDialogElement.prototype) {
+    const dialog = document.createElement('dialog');
+    dialog.className = 'gv-dialog';
+    dialog.setAttribute('aria-labelledby','privacy-dialog-title');
+    dialog.innerHTML = '<div class="gv-dialog-heading"><h2 id="privacy-dialog-title"></h2><button class="gv-btn gv-btn-secondary" type="button" data-i18n="privacyClose" autofocus>Cerrar</button></div>';
+    const title = privacy.querySelector('summary');
+    const heading = dialog.querySelector('h2');
+    heading.dataset.i18n = title.dataset.i18n;
+    heading.textContent = title.textContent;
+    dialog.append(privacy.querySelector('p'));
+    privacy.replaceChildren(dialog);
+    privacy.classList.add('privacy-enhanced');
+    const trigger = document.querySelector('.privacy-link');
+    trigger.setAttribute('aria-haspopup','dialog');
+    function openPrivacy() {
+      if (!dialog.open) { dialog.showModal(); document.documentElement.classList.add('gv-modal-open'); }
+    }
+    trigger.addEventListener('click', event => { event.preventDefault(); openPrivacy(); });
+    dialog.querySelector('button').addEventListener('click', () => dialog.close());
+    let backdropPress = false;
+    const outside = event => { const rect=dialog.getBoundingClientRect(); return event.clientX<rect.left || event.clientX>rect.right || event.clientY<rect.top || event.clientY>rect.bottom; };
+    dialog.addEventListener('pointerdown', event => { backdropPress=outside(event); });
+    dialog.addEventListener('click', event => { if (backdropPress && outside(event)) dialog.close(); backdropPress=false; });
+    dialog.addEventListener('close', () => { document.documentElement.classList.remove('gv-modal-open'); trigger.focus({preventScroll:true}); });
+    window.addEventListener('hashchange', () => { if (location.hash === '#privacidad') openPrivacy(); });
+    if (location.hash === '#privacidad') openPrivacy();
+  }
   const elements = [...document.querySelectorAll('[data-i18n]')];
   const spanish = Object.fromEntries(elements.map(el => [el.dataset.i18n, el.innerHTML]));
   Object.assign(spanish, {languageLabel:'Idioma',themeLabel:'Cambiar tema',menuLabel:'Alternar navegación',navLabel:'Navegación principal',openedWa:'Se abrirá WhatsApp con tu mensaje. Revisalo y envialo allí.',openedEmail:'Se abrirá tu aplicación de correo con el mensaje. Revisalo y envialo allí.',messageIntro:'¡Hola GentleVanguard! Quiero conversar sobre un proyecto.',messageName:'Nombre',messageCompany:'Organización',messageInterest:'Interés',emailSubject:'Consulta para GentleVanguard'});
